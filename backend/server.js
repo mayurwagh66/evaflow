@@ -22,7 +22,6 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../frontend')));
 
 app.use('/api/shipments', shipmentsRouter);
 app.use('/api/emissions', emissionsRouter);
@@ -35,10 +34,6 @@ app.get('/api/config', (req, res) => {
   res.json({
     googleMapsKey: process.env.GOOGLE_MAPS_API_KEY || ''
   });
-});
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
 // Initialize with sample data if empty
