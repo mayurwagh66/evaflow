@@ -13,10 +13,6 @@ const insightsRouter = require('./routes/insights');
 
 connectDB();
 
-// Add sample data for demo
-const MemoryStore = require('./services/memoryStore');
-const addSampleData = require('./addSampleData');
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -41,38 +37,28 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
-// Initialize with sample data if empty
-let sampleDataInitialized = false;
+// Add sample data
+const MemoryStore = require('./services/memoryStore');
+const addSampleData = require('./addSampleData');
 
-const initializeSampleData = async () => {
-  if (!sampleDataInitialized) {
-    try {
-      const existingData = await MemoryStore.find();
-      if (existingData.length === 0) {
-        console.log('Adding sample data...');
-        await addSampleData();
-        console.log('Sample data added successfully');
-      }
-      sampleDataInitialized = true;
-    } catch (error) {
-      console.log('Error adding sample data:', error.message);
+// Initialize sample data
+setTimeout(async () => {
+  try {
+    const existingData = await MemoryStore.find();
+    if (existingData.length === 0) {
+      console.log('Adding sample data...');
+      await addSampleData();
+      console.log('Sample data added successfully!');
     }
+  } catch (error) {
+    console.log('Sample data error:', error.message);
   }
-};
+}, 1000);
 
-// For local development
 app.listen(PORT, () => {
-  console.log(`EvaFlow Carbon Intelligence Platform running on http://localhost:${PORT}`);
+  console.log(`🚀 EvaFlow running on http://localhost:${PORT}`);
+  console.log('📊 Dashboard: http://localhost:3000');
+  console.log('📦 API: http://localhost:3000/api');
 });
 
-// Keep the process alive
-process.on('SIGINT', () => {
-  console.log('Shutting down gracefully...');
-  process.exit(0);
-});
-
-// For Vercel serverless
-module.exports = async (req, res) => {
-  await initializeSampleData();
-  return app(req, res);
-};
+console.log('Starting EvaFlow Carbon Intelligence Platform...');
