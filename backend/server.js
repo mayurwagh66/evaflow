@@ -12,6 +12,24 @@ const chatbotRouter = require('./routes/chatbot');
 const insightsRouter = require('./routes/insights');
 
 connectDB();
+
+// Add sample data for demo
+const MemoryStore = require('./services/memoryStore');
+const addSampleData = require('./addSampleData');
+
+// Initialize with sample data if empty
+setTimeout(async () => {
+  try {
+    const existingData = await MemoryStore.find();
+    if (existingData.length === 0) {
+      console.log('Adding sample data...');
+      await addSampleData();
+      console.log('Sample data added successfully');
+    }
+  } catch (error) {
+    console.log('Error adding sample data:', error.message);
+  }
+}, 1000);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
