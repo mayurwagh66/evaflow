@@ -113,6 +113,15 @@ EvaFlow addresses these challenges through a comprehensive web-based platform th
 - **Accessibility**: WCAG compliant design principles
 
 ---
+## Architecture Diagram
+<img width="1536" height="1024" alt="ChatGPT Image Mar 9, 2026, 09_26_26 AM" src="https://github.com/user-attachments/assets/d113b29f-be90-46de-8d06-5f389de13c35" />
+
+## User flow diagram 
+<img width="857" height="642" alt="_- visual selection" src="https://github.com/user-attachments/assets/13fcebfb-ad89-4085-bfbe-73e9d9e31fdc" />
+
+## Process Flow diagram
+<img width="1536" height="1024" alt="ChatGPT Image Mar 9, 2026, 09_37_47 AM" src="https://github.com/user-attachments/assets/41dac2cb-2a31-47ce-a2fa-2256fbe7d720" />
+
 
 ## 🛠️ Technology Stack
 
