@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EvaFlow - Sustainability Insights</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .insight-card {
+      background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .insight-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #10b981, #059669);
+    }
+    .insight-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    }
+    .insight-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .insight-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+    .insight-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #059669;
+      margin-bottom: 0.5rem;
+    }
+    .insight-description {
+      color: #64748b;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .insight-trend {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+    .trend-up {
+      background: #dcfce7;
+      color: #16a34a;
+    }
+    .trend-down {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+    .recommendations-card {
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      border: 1px solid #a7f3d0;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    .recommendations-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #065f46;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .recommendation-item {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #10b981;
+    }
+    .recommendation-title {
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+    .recommendation-text {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+    .impact-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+    .impact-high {
+      background: #fef3c7;
+      color: #d97706;
+    }
+    .impact-medium {
+      background: #dbeafe;
+      color: #2563eb;
+    }
+    .impact-low {
+      background: #e0e7ff;
+      color: #6366f1;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #10b981, #059669);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+    
+    /* Enhanced Chart Styles */
+    .trend-chart-container, .fuel-chart-container, .efficiency-chart-container {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      border: 1px solid #e2e8f0;
+    }
+    
+    .trend-chart {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-end;
+      height: 200px;
+      padding: 1rem 0;
+    }
+    
+    .trend-bar {
+      flex: 1;
+      background: linear-gradient(135deg, #10b981, #059669);
+      border-radius: 8px 8px 0 0;
+      position: relative;
+      min-height: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    
+    .trend-bar:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(16,185,129,0.2);
+    }
+    
+    .trend-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+    
+    .trend-value {
+      font-size: 0.9rem;
+      color: #059669;
+      font-weight: 600;
+    }
+    
+    .fuel-chart {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .fuel-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .fuel-bar {
+      height: 24px;
+      border-radius: 12px;
+      min-width: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .fuel-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255,255,255,0.2);
+      border-radius: 12px;
+    }
+    
+    .fuel-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    
+    .fuel-type {
+      font-weight: 600;
+      color: #1e293b;
+      font-size: 1rem;
+    }
+    
+    .fuel-stats {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+    
+    .efficiency-chart {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .efficiency-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: #f8fafc;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .efficiency-item:hover {
+      background: #f1f5f9;
+      transform: translateX(4px);
+    }
+    
+    .efficiency-bar {
+      width: 200px;
+      height: 12px;
+      background: #e2e8f0;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .efficiency-fill {
+      height: 100%;
+      border-radius: 6px;
+      transition: width 0.5s ease;
+    }
+    
+    .efficiency-fill.excellent {
+      background: linear-gradient(90deg, #10b981, #059669);
+    }
+    
+    .efficiency-fill.good {
+      background: linear-gradient(90deg, #3b82f6, #2563eb);
+    }
+    
+    .efficiency-fill.moderate {
+      background: linear-gradient(90deg, #f59e0b, #d97706);
+    }
+    
+    .efficiency-fill.poor {
+      background: linear-gradient(90deg, #dc2626, #991b1b);
+    }
+    
+    .efficiency-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      min-width: 200px;
+    }
+    
+    .efficiency-route {
+      font-weight: 600;
+      color: #1e293b;
+      font-size: 0.9rem;
+    }
+    
+    .efficiency-score {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #059669;
+    }
+    
+    .efficiency-status {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.25rem 0.5rem;
+      border-radius: 12px;
+      text-transform: uppercase;
+    }
+    
+    .efficiency-status.excellent {
+      background: #dcfce7;
+      color: #16a34a;
+    }
+    
+    .efficiency-status.good {
+      background: #dbeafe;
+      color: #2563eb;
+    }
+    
+    .efficiency-status.moderate {
+      background: #fef3c7;
+      color: #d97706;
+    }
+    
+    .efficiency-status.poor {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+    
+    /* Enhanced Recommendations */
+    .recommendation-item-enhanced {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #10b981;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .recommendation-item-enhanced:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      border-left-color: #059669;
+    }
+    
+    .recommendation-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      gap: 1rem;
+    }
+    
+    .recommendation-priority {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+    
+    .recommendation-priority.priority-high {
+      background: #fef3c7;
+      color: #d97706;
+    }
+    
+    .recommendation-priority.priority-medium {
+      background: #dbeafe;
+      color: #2563eb;
+    }
+    
+    .recommendation-savings {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    .recommendation-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    
+    .action-btn {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+    
+    .action-btn:hover {
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <h1><span class="logo-icon">🌿</span><span>EvaFlow</span></h1>
+      </div>
+      <ul class="sidebar-nav">
+        <li><a href="index.html"><span class="nav-icon">📊</span><span>Dashboard</span></a></li>
+        <li><a href="shipments.html"><span class="nav-icon">📦</span><span>Shipments</span></a></li>
+        <li><a href="map.html"><span class="nav-icon">🗺️</span><span>Map View</span></a></li>
+        <li><a href="insights.html" class="active"><span class="nav-icon">🌱</span><span>Sustainability Insights</span></a></li>
+        <li><a href="reports.html"><span class="nav-icon">📄</span><span>Reports</span></a></li>
+      </ul>
+    </aside>
+    <main class="main-content">
+      <div class="page-header">
+        <h2>Sustainability Insights</h2>
+        <p>Comprehensive analysis of your carbon footprint and sustainability performance</p>
+      </div>
+
+      <!-- Key Metrics -->
+      <div class="insights-grid">
+        <div class="insight-card">
+          <div class="insight-icon" style="background: linear-gradient(135deg, #dcfce7, #bbf7d0);">
+            🌍
+          </div>
+          <div class="insight-title">Total CO₂ Emissions</div>
+          <div class="insight-value" id="totalEmissions">0</div>
+          <div class="insight-description">Total carbon emissions from all shipments</div>
+          <div class="insight-trend trend-down">
+            ↓ 12% from last month
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-icon" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">
+            📈
+          </div>
+          <div class="insight-title">Emission Efficiency</div>
+          <div class="insight-value" id="efficiency">0</div>
+          <div class="insight-description">Average CO₂ per km traveled</div>
+          <div class="insight-trend trend-up">
+            ↑ 8% improvement
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-icon" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe);">
+            🚚
+          </div>
+          <div class="insight-title">Total Shipments</div>
+          <div class="insight-value" id="totalShipments">0</div>
+          <div class="insight-description">Number of shipments tracked</div>
+          <div class="insight-trend trend-up">
+            ↑ 15% increase
+          </div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-icon" style="background: linear-gradient(135deg, #fce7f3, #fbcfe8);">
+            ⭐
+          </div>
+          <div class="insight-title">Sustainability Score</div>
+          <div class="insight-value" id="sustainabilityScore">0</div>
+          <div class="insight-description">Overall sustainability performance</div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="scoreProgress" style="width: 0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="recommendations-card">
+        <div class="recommendations-title">
+          🎯 Sustainability Recommendations
+        </div>
+        <div id="recommendationsList"></div>
+      </div>
+
+      <!-- Detailed Insights -->
+      <div class="insights-grid">
+        <div class="insight-card">
+          <div class="insight-icon" style="background: linear-gradient(135deg, #e0e7ff, #c7d2fe);">
+            🛣️
+          </div>
+          <div class="insight-title">Most Efficient Route</div>
+          <div class="insight-value" id="efficientRoute">-</div>
+          <div class="insight-description">Route with lowest emissions per km</div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-icon" style="background: linear-gradient(135deg, #fee2e2, #fecaca);">
+            ⚠️
+          </div>
+          <div class="insight-title">High Emission Alert</div>
+          <div class="insight-value" id="highEmissionAlert">0</div>
+          <div class="insight-description">Routes exceeding emission thresholds</div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-icon" style="background: linear-gradient(135deg, #f3e8ff, #e9d5ff);">
+            💡
+          </div>
+          <div class="insight-title">Potential Savings</div>
+          <div class="insight-value" id="potentialSavings">0</div>
+          <div class="insight-description">Estimated CO₂ reduction with optimizations</div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-icon" style="background: linear-gradient(135deg, #ecfdf5, #d1fae5);">
+            🌱
+          </div>
+          <div class="insight-title">Green Initiatives</div>
+          <div class="insight-value" id="greenInitiatives">0</div>
+          <div class="insight-description">Active sustainability programs</div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <button class="chatbot-toggle" id="chatbotToggle" title="EvaFlow AI Assistant">💬</button>
+  <div class="chatbot-panel" id="chatbotPanel">
+    <div class="chatbot-header">🌿 EvaFlow AI Assistant</div>
+    <div class="chatbot-messages" id="chatMessages"></div>
+    <div class="chatbot-input">
+      <input type="text" id="chatInput" placeholder="Ask about emissions...">
+      <button class="btn btn-primary" id="chatSend">Send</button>
+    </div>
+  </div>
+  <script src="js/insights.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

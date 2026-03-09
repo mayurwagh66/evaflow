@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EvaFlow - Shipment Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <h1><span class="logo-icon">🌿</span><span>EvaFlow</span></h1>
+      </div>
+      <ul class="sidebar-nav">
+        <li><a href="index.html"><span class="nav-icon">📊</span><span>Dashboard</span></a></li>
+        <li><a href="shipments.html" class="active"><span class="nav-icon">📦</span><span>Shipments</span></a></li>
+        <li><a href="map.html"><span class="nav-icon">🗺️</span><span>Map View</span></a></li>
+        <li><a href="insights.html"><span class="nav-icon">🌱</span><span>Sustainability Insights</span></a></li>
+        <li><a href="reports.html"><span class="nav-icon">📄</span><span>Reports</span></a></li>
+      </ul>
+    </aside>
+    <main class="main-content">
+      <div class="page-header">
+        <h2>Shipment Management</h2>
+        <p>Add shipments and upload bulk data to track carbon emissions</p>
+      </div>
+      <div class="card">
+        <div class="card-title">Add New Shipment</div>
+        <div id="addAlert"></div>
+        <form id="shipmentForm">
+          <div class="form-row">
+            <div class="form-group" style="flex:1">
+              <label>Origin City</label>
+              <select id="originCity" class="form-control" required>
+                <option value="">Select Origin City</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Pune">Pune</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Surat">Surat</option>
+                <option value="Lucknow">Lucknow</option>
+                <option value="Kanpur">Kanpur</option>
+                <option value="Nagpur">Nagpur</option>
+                <option value="Indore">Indore</option>
+                <option value="Thane">Thane</option>
+                <option value="Bhopal">Bhopal</option>
+                <option value="Visakhapatnam">Visakhapatnam</option>
+                <option value="Pimpri-Chinchwad">Pimpri-Chinchwad</option>
+                <option value="Patna">Patna</option>
+                <option value="Vadodara">Vadodara</option>
+                <option value="Ghaziabad">Ghaziabad</option>
+                <option value="Ludhiana">Ludhiana</option>
+                <option value="Agra">Agra</option>
+                <option value="Nashik">Nashik</option>
+                <option value="Faridabad">Faridabad</option>
+                <option value="Meerut">Meerut</option>
+                <option value="Rajkot">Rajkot</option>
+                <option value="Kalyan-Dombivali">Kalyan-Dombivali</option>
+                <option value="Vasai-Virar">Vasai-Virar</option>
+                <option value="Varanasi">Varanasi</option>
+                <option value="Srinagar">Srinagar</option>
+                <option value="Dhanbad">Dhanbad</option>
+                <option value="Jodhpur">Jodhpur</option>
+                <option value="Amritsar">Amritsar</option>
+                <option value="Raipur">Raipur</option>
+                <option value="Allahabad">Allahabad</option>
+                <option value="Coimbatore">Coimbatore</option>
+                <option value="Vijayawada">Vijayawada</option>
+                <option value="Madurai">Madurai</option>
+                <option value="Guwahati">Guwahati</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Hubli-Dharwad">Hubli-Dharwad</option>
+                <option value="Mysore">Mysore</option>
+                <option value="Tiruchirappalli">Tiruchirappalli</option>
+                <option value="Salem">Salem</option>
+                <option value="Tiruppur">Tiruppur</option>
+                <option value="Gurgaon">Gurgaon</option>
+                <option value="Bhiwandi">Bhiwandi</option>
+                <option value="Jalandhar">Jalandhar</option>
+                <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                <option value="Navi Mumbai">Navi Mumbai</option>
+                <option value="Ranchi">Ranchi</option>
+                <option value="Amravati">Amravati</option>
+                <option value="Kochi">Kochi</option>
+                <option value="Kota">Kota</option>
+                <option value="Kolhapur">Kolhapur</option>
+                <option value="Bhilai">Bhilai</option>
+                <option value="Ajmer">Ajmer</option>
+                <option value="Gwalior">Gwalior</option>
+                <option value="Ujjain">Ujjain</option>
+                <option value="Jammu">Jammu</option>
+                <option value="Tirupati">Tirupati</option>
+                <option value="Gorakhpur">Gorakhpur</option>
+                <option value="Bareilly">Bareilly</option>
+                <option value="Moradabad">Moradabad</option>
+                <option value="Mangalore">Mangalore</option>
+                <option value="Bikaner">Bikaner</option>
+                <option value="Siliguri">Siliguri</option>
+                <option value="Panipat">Panipat</option>
+                <option value="Aligarh">Aligarh</option>
+                <option value="Rohatak">Rohatak</option>
+                <option value="Jamshedpur">Jamshedpur</option>
+                <option value="Bhubaneswar">Bhubaneswar</option>
+                <option value="Dehradun">Dehradun</option>
+                <option value="Cuttack">Cuttack</option>
+                <option value="Firozabad">Firozabad</option>
+                <option value="Gurgaon">Gurgaon</option>
+                <option value="Kochi">Kochi</option>
+                <option value="Noida">Noida</option>
+                <option value="Rourkela">Rourkela</option>
+                <option value="Durgapur">Durgapur</option>
+                <option value="Vapi">Vapi</option>
+                <option value="Bokaro">Bokaro</option>
+                <option value="South Dumdum">South Dumdum</option>
+                <option value="Khandwa">Khandwa</option>
+                <option value="Muzaffarnagar">Muzaffarnagar</option>
+                <option value="Uttarpara">Uttarpara</option>
+                <option value="Kharagpur">Kharagpur</option>
+                <option value="Mangalore">Mangalore</option>
+                <option value="Tumkur">Tumkur</option>
+                <option value="Baharampur">Baharampur</option>
+                <option value="Pondicherry">Pondicherry</option>
+                <option value="Sambalpur">Sambalpur</option>
+                <option value="Tirunelveli">Tirunelveli</option>
+                <option value="Malegaon">Malegaon</option>
+                <option value="Gaya">Gaya</option>
+                <option value="Jalgaon">Jalgaon</option>
+                <option value="Maheshtala">Maheshtala</option>
+                <option value="Udaipur">Udaipur</option>
+                <option value="Bellary">Bellary</option>
+                <option value="Bokaro">Bokaro</option>
+                <option value="South Dumdum">South Dumdum</option>
+                <option value="Khandwa">Khandwa</option>
+                <option value="Muzaffarnagar">Muzaffarnagar</option>
+                <option value="Uttarpara">Uttarpara</option>
+                <option value="Kharagpur">Kharagpur</option>
+                <option value="Mangalore">Mangalore</option>
+                <option value="Tumkur">Tumkur</option>
+                <option value="Baharampur">Baharampur</option>
+                <option value="Pondicherry">Pondicherry</option>
+                <option value="Sambalpur">Sambalpur</option>
+                <option value="Tirunelveli">Tirunelveli</option>
+                <option value="Malegaon">Malegaon</option>
+                <option value="Gaya">Gaya</option>
+                <option value="Jalgaon">Jalgaon</option>
+                <option value="Maheshtala">Maheshtala</option>
+                <option value="Udaipur">Udaipur</option>
+                <option value="Bellary">Bellary</option>
+              </select>
+            </div>
+            <div class="form-group" style="flex:1">
+              <label>Destination City</label>
+              <select id="destinationCity" class="form-control" required>
+                <option value="">Select Destination City</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Pune">Pune</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Surat">Surat</option>
+                <option value="Lucknow">Lucknow</option>
+                <option value="Kanpur">Kanpur</option>
+                <option value="Nagpur">Nagpur</option>
+                <option value="Indore">Indore</option>
+                <option value="Thane">Thane</option>
+                <option value="Bhopal">Bhopal</option>
+                <option value="Visakhapatnam">Visakhapatnam</option>
+                <option value="Pimpri-Chinchwad">Pimpri-Chinchwad</option>
+                <option value="Patna">Patna</option>
+                <option value="Vadodara">Vadodara</option>
+                <option value="Ghaziabad">Ghaziabad</option>
+                <option value="Ludhiana">Ludhiana</option>
+                <option value="Agra">Agra</option>
+                <option value="Nashik">Nashik</option>
+                <option value="Faridabad">Faridabad</option>
+                <option value="Meerut">Meerut</option>
+                <option value="Rajkot">Rajkot</option>
+                <option value="Kalyan-Dombivali">Kalyan-Dombivali</option>
+                <option value="Vasai-Virar">Vasai-Virar</option>
+                <option value="Varanasi">Varanasi</option>
+                <option value="Srinagar">Srinagar</option>
+                <option value="Dhanbad">Dhanbad</option>
+                <option value="Jodhpur">Jodhpur</option>
+                <option value="Amritsar">Amritsar</option>
+                <option value="Raipur">Raipur</option>
+                <option value="Allahabad">Allahabad</option>
+                <option value="Coimbatore">Coimbatore</option>
+                <option value="Vijayawada">Vijayawada</option>
+                <option value="Madurai">Madurai</option>
+                <option value="Guwahati">Guwahati</option>
+                <option value="Chandigarh">Chandigarh</option>
+                <option value="Hubli-Dharwad">Hubli-Dharwad</option>
+                <option value="Mysore">Mysore</option>
+                <option value="Tiruchirappalli">Tiruchirappalli</option>
+                <option value="Salem">Salem</option>
+                <option value="Tiruppur">Tiruppur</option>
+                <option value="Gurgaon">Gurgaon</option>
+                <option value="Bhiwandi">Bhiwandi</option>
+                <option value="Jalandhar">Jalandhar</option>
+                <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                <option value="Navi Mumbai">Navi Mumbai</option>
+                <option value="Ranchi">Ranchi</option>
+                <option value="Amravati">Amravati</option>
+                <option value="Kochi">Kochi</option>
+                <option value="Kota">Kota</option>
+                <option value="Kolhapur">Kolhapur</option>
+                <option value="Bhilai">Bhilai</option>
+                <option value="Ajmer">Ajmer</option>
+                <option value="Gwalior">Gwalior</option>
+                <option value="Ujjain">Ujjain</option>
+                <option value="Jammu">Jammu</option>
+                <option value="Tirupati">Tirupati</option>
+                <option value="Gorakhpur">Gorakhpur</option>
+                <option value="Bareilly">Bareilly</option>
+                <option value="Moradabad">Moradabad</option>
+                <option value="Mangalore">Mangalore</option>
+                <option value="Bikaner">Bikaner</option>
+                <option value="Siliguri">Siliguri</option>
+                <option value="Panipat">Panipat</option>
+                <option value="Aligarh">Aligarh</option>
+                <option value="Rohatak">Rohatak</option>
+                <option value="Jamshedpur">Jamshedpur</option>
+                <option value="Bhubaneswar">Bhubaneswar</option>
+                <option value="Dehradun">Dehradun</option>
+                <option value="Cuttack">Cuttack</option>
+                <option value="Firozabad">Firozabad</option>
+                <option value="Gurgaon">Gurgaon</option>
+                <option value="Kochi">Kochi</option>
+                <option value="Noida">Noida</option>
+                <option value="Rourkela">Rourkela</option>
+                <option value="Durgapur">Durgapur</option>
+                <option value="Vapi">Vapi</option>
+                <option value="Bokaro">Bokaro</option>
+                <option value="South Dumdum">South Dumdum</option>
+                <option value="Khandwa">Khandwa</option>
+                <option value="Muzaffarnagar">Muzaffarnagar</option>
+                <option value="Uttarpara">Uttarpara</option>
+                <option value="Kharagpur">Kharagpur</option>
+                <option value="Mangalore">Mangalore</option>
+                <option value="Tumkur">Tumkur</option>
+                <option value="Baharampur">Baharampur</option>
+                <option value="Pondicherry">Pondicherry</option>
+                <option value="Sambalpur">Sambalpur</option>
+                <option value="Tirunelveli">Tirunelveli</option>
+                <option value="Malegaon">Malegaon</option>
+                <option value="Gaya">Gaya</option>
+                <option value="Jalgaon">Jalgaon</option>
+                <option value="Maheshtala">Maheshtala</option>
+                <option value="Udaipur">Udaipur</option>
+                <option value="Bellary">Bellary</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Truck Type</label>
+              <select id="truckType" class="form-control">
+                <option value="Mini">Mini</option>
+                <option value="Light">Light</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Heavy">Heavy</option>
+                <option value="Trailer">Trailer</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Fuel Type</label>
+              <select id="fuelType" class="form-control">
+                <option value="Diesel" selected>Diesel</option>
+                <option value="Petrol">Petrol</option>
+                <option value="CNG">CNG</option>
+                <option value="LNG">LNG</option>
+                <option value="Electric">Electric</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Shipment Weight (kg)</label>
+              <input type="number" id="shipmentWeight" class="form-control" placeholder="e.g. 5000" required min="1">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Shipment Date</label>
+              <input type="date" id="shipmentDate" class="form-control" required>
+            </div>
+            <div class="form-group" style="flex:1">
+              <label>Carrier Name</label>
+              <input type="text" id="carrierName" class="form-control" placeholder="e.g. ABC Logistics" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Add Shipment & Calculate Emissions</button>
+        </form>
+      </div>
+      <div class="card">
+        <div class="card-title">Bulk Upload (CSV / Excel)</div>
+        <p style="margin-bottom:1rem;color:var(--eva-text-muted);font-size:0.9rem;">Upload a CSV or Excel file with columns: origin/originCity, destination/destinationCity, truckType, fuelType, shipmentWeight/weight, shipmentDate/date, carrierName/carrier</p>
+        <div class="file-upload-zone" id="uploadZone">
+          <input type="file" id="bulkFile" accept=".csv,.xlsx,.xls">
+          <p>Drop file here or click to upload</p>
+        </div>
+        <div id="bulkResult" style="margin-top:1rem;"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Recent Shipments</div>
+        <div class="table-wrapper">
+          <table class="data-table" id="shipmentsTable">
+            <thead>
+              <tr>
+                <th>Lane</th>
+                <th>Carrier</th>
+                <th>Weight</th>
+                <th>Distance</th>
+                <th>CO₂ (kg)</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="shipmentsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+  <button class="chatbot-toggle" id="chatbotToggle" title="EvaFlow AI Assistant">💬</button>
+  <div class="chatbot-panel" id="chatbotPanel">
+    <div class="chatbot-header">🌿 EvaFlow AI Assistant</div>
+    <div class="chatbot-messages" id="chatMessages"></div>
+    <div class="chatbot-input">
+      <input type="text" id="chatInput" placeholder="Ask about emissions...">
+      <button class="btn btn-primary" id="chatSend">Send</button>
+    </div>
+  </div>
+  <script src="js/shipments.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>
