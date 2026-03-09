@@ -49,3 +49,6 @@ uploads/
 # Temporary files
 tmp/
 temp/
+
+.vercel
+.env*.local
