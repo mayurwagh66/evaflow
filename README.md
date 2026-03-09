@@ -5,6 +5,9 @@
 A comprehensive web application that helps logistics companies track, analyze, and reduce carbon emissions in road freight transportation through intelligent data analytics and AI-powered insights.
 
 ---
+## Project Demo Video link
+https://drive.google.com/file/d/104eoBWF1DeOPmX8mArcxg74jUI1GyaE3/view?usp=drive_link
+
 
 ## 📋 Table of Contents
 
