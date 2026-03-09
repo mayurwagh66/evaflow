@@ -17,19 +17,6 @@ connectDB();
 const MemoryStore = require('./services/memoryStore');
 const addSampleData = require('./addSampleData');
 
-// Initialize with sample data if empty
-setTimeout(async () => {
-  try {
-    const existingData = await MemoryStore.find();
-    if (existingData.length === 0) {
-      console.log('Adding sample data...');
-      await addSampleData();
-      console.log('Sample data added successfully');
-    }
-  } catch (error) {
-    console.log('Error adding sample data:', error.message);
-  }
-}, 1000);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -54,13 +41,34 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
-// Vercel serverless handler
-module.exports = (req, res) => {
-  app(req, res);
+// Initialize with sample data if empty
+let sampleDataInitialized = false;
+
+const initializeSampleData = async () => {
+  if (!sampleDataInitialized) {
+    try {
+      const existingData = await MemoryStore.find();
+      if (existingData.length === 0) {
+        console.log('Adding sample data...');
+        await addSampleData();
+        console.log('Sample data added successfully');
+      }
+      sampleDataInitialized = true;
+    } catch (error) {
+      console.log('Error adding sample data:', error.message);
+    }
+  }
 };
 
-// Local development
+// For Vercel serverless
+module.exports = async (req, res) => {
+  await initializeSampleData();
+  return app(req, res);
+};
+
+// For local development
 if (process.env.NODE_ENV !== 'production') {
+  initializeSampleData();
   app.listen(PORT, () => {
     console.log(`EvaFlow Carbon Intelligence Platform running on http://localhost:${PORT}`);
   });
