@@ -37,6 +37,9 @@ EvaFlow is a carbon intelligence platform designed specifically for road freight
 - Generate comprehensive sustainability reports
 - Provide AI-powered recommendations for emission reduction
 - Visualize data through interactive dashboards and maps
+ <img width="1887" height="827" alt="image" src="https://github.com/user-attachments/assets/0a1ec03a-ee34-47cb-bec6-7dab8c45730a" />
+<img width="1901" height="812" alt="image" src="https://github.com/user-attachments/assets/a077583a-3e75-4b9e-8e90-1ffb7bf70ad7" />
+
 
 ### 🌍 Environmental Impact
 - Helps companies reduce their carbon footprint by 15-30%
