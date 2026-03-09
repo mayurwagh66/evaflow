@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EvaFlow - Emission Reports</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <h1><span class="logo-icon">🌿</span><span>EvaFlow</span></h1>
+      </div>
+      <ul class="sidebar-nav">
+        <li><a href="index.html"><span class="nav-icon">📊</span><span>Dashboard</span></a></li>
+        <li><a href="shipments.html"><span class="nav-icon">📦</span><span>Shipments</span></a></li>
+        <li><a href="map.html"><span class="nav-icon">🗺️</span><span>Map View</span></a></li>
+        <li><a href="insights.html"><span class="nav-icon">🌱</span><span>Sustainability Insights</span></a></li>
+        <li><a href="reports.html" class="active"><span class="nav-icon">📄</span><span>Reports</span></a></li>
+      </ul>
+    </aside>
+    <main class="main-content">
+      <div class="page-header">
+        <h2>Emission Reports</h2>
+        <p>Generate and download carbon emission reports</p>
+      </div>
+      <div class="card">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Start Date</label>
+            <input type="date" id="reportStartDate" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>End Date</label>
+            <input type="date" id="reportEndDate" class="form-control">
+          </div>
+          <div class="form-group" style="align-self:flex-end;">
+            <button class="btn btn-primary" id="generateReport">Generate Report</button>
+            <button class="btn btn-secondary" id="downloadPdf" style="margin-left:0.5rem;">Download PDF</button>
+          </div>
+        </div>
+      </div>
+      <div id="reportContent"></div>
+    </main>
+  </div>
+  <button class="chatbot-toggle" id="chatbotToggle" title="EvaFlow AI Assistant">💬</button>
+  <div class="chatbot-panel" id="chatbotPanel">
+    <div class="chatbot-header">🌿 EvaFlow AI Assistant</div>
+    <div class="chatbot-messages" id="chatMessages"></div>
+    <div class="chatbot-input">
+      <input type="text" id="chatInput" placeholder="Ask about emissions...">
+      <button class="btn btn-primary" id="chatSend">Send</button>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="js/reports.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

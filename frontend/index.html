@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EvaFlow - Carbon Intelligence Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <h1><span class="logo-icon">🌿</span><span>EvaFlow</span></h1>
+      </div>
+      <ul class="sidebar-nav">
+        <li><a href="index.html" class="active"><span class="nav-icon">📊</span><span>Dashboard</span></a></li>
+        <li><a href="shipments.html"><span class="nav-icon">📦</span><span>Shipments</span></a></li>
+        <li><a href="map.html"><span class="nav-icon">🗺️</span><span>Map View</span></a></li>
+        <li><a href="insights.html"><span class="nav-icon">🌱</span><span>Sustainability Insights</span></a></li>
+        <li><a href="reports.html"><span class="nav-icon">📄</span><span>Reports</span></a></li>
+      </ul>
+    </aside>
+    <main class="main-content">
+      <div class="page-header">
+        <h2>Carbon Intelligence Dashboard</h2>
+        <p>Track, analyze, and reduce emissions across your road freight operations</p>
+      </div>
+      <div class="stats-grid" id="statsGrid"></div>
+      <div class="chart-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:1.5rem;">
+        <div class="card">
+          <div class="card-title">Monthly Emission Trend</div>
+          <div class="chart-container"><canvas id="trendChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Lane Emission Comparison</div>
+          <div class="chart-container"><canvas id="laneChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Carrier Emission Comparison</div>
+          <div class="chart-container"><canvas id="carrierChart"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="card-title">High Emission Lanes</div>
+          <div class="chart-container"><canvas id="highEmissionChart"></canvas></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Sustainability Insights</div>
+        <div id="insightsContent"></div>
+      </div>
+    </main>
+  </div>
+  <button class="chatbot-toggle" id="chatbotToggle" title="EvaFlow AI Assistant">💬</button>
+  <div class="chatbot-panel" id="chatbotPanel">
+    <div class="chatbot-header">🌿 EvaFlow AI Assistant</div>
+    <div class="chatbot-messages" id="chatMessages">
+      <div class="chat-message bot">Hi! I'm your sustainability assistant. Ask me about emissions, lanes, carriers, or how to reduce your carbon footprint.</div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatInput" placeholder="Ask about emissions...">
+      <button class="btn btn-primary" id="chatSend">Send</button>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

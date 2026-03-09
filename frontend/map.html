@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EvaFlow - Map Visualization</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 500px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .route-info {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      padding: 15px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      min-width: 200px;
+      z-index: 1000;
+    }
+    .route-info h3 {
+      margin: 0 0 10px 0;
+      color: #1e3c72;
+      font-size: 16px;
+    }
+    .route-info .stat {
+      display: flex;
+      justify-content: space-between;
+      margin: 5px 0;
+      font-size: 13px;
+    }
+    .route-info .stat-label {
+      color: #666;
+    }
+    .route-info .stat-value {
+      font-weight: 600;
+      color: #1e3c72;
+    }
+    .map-legend {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(255,255,255,0.9);
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 12px;
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin: 3px 0;
+    }
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <h1><span class="logo-icon">🌿</span><span>EvaFlow</span></h1>
+      </div>
+      <ul class="sidebar-nav">
+        <li><a href="index.html"><span class="nav-icon">📊</span><span>Dashboard</span></a></li>
+        <li><a href="shipments.html"><span class="nav-icon">📦</span><span>Shipments</span></a></li>
+        <li><a href="map.html" class="active"><span class="nav-icon">🗺️</span><span>Map View</span></a></li>
+        <li><a href="insights.html"><span class="nav-icon">🌱</span><span>Sustainability Insights</span></a></li>
+        <li><a href="reports.html"><span class="nav-icon">📄</span><span>Reports</span></a></li>
+      </ul>
+    </aside>
+    <main class="main-content">
+      <div class="page-header">
+        <h2>Route Map Visualization</h2>
+        <p>View shipment routes and emissions on the map</p>
+      </div>
+      <div class="card">
+        <div class="form-row" style="margin-bottom:1rem;">
+          <div class="form-group">
+            <label>Select Lane to Display</label>
+            <select id="laneSelect" class="form-control">
+              <option value="">-- Select lane --</option>
+            </select>
+          </div>
+          <div class="form-group" style="align-self:flex-end;">
+            <button class="btn btn-primary" id="loadRoute">Show Route</button>
+          </div>
+        </div>
+        <div id="map"></div>
+      
+      <div class="route-info" id="routeInfo">
+        <h3>📍 Route Information</h3>
+        <div class="stat">
+          <span class="stat-label">Select a lane to view</span>
+        </div>
+      </div>
+      
+      <div class="map-legend">
+        <div class="legend-item">
+          <div class="legend-color" style="background: #34A853;"></div>
+          <span>Selected Route</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: #ff6b6b;"></div>
+          <span>Origin/Destination</span>
+        </div>
+      </div>
+    </div>
+      </div>
+    </main>
+  </div>
+  <button class="chatbot-toggle" id="chatbotToggle" title="EvaFlow AI Assistant">💬</button>
+  <div class="chatbot-panel" id="chatbotPanel">
+    <div class="chatbot-header">🌿 EvaFlow AI Assistant</div>
+    <div class="chatbot-messages" id="chatMessages"></div>
+    <div class="chatbot-input">
+      <input type="text" id="chatInput" placeholder="Ask about emissions...">
+      <button class="btn btn-primary" id="chatSend">Send</button>
+    </div>
+  </div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>
