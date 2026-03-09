@@ -3,11 +3,10 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
-// Try to connect to DB, but don't fail if it doesn't work
-try {
-  require('./config/db');
-} catch (error) {
-  console.log('Database connection skipped, using in-memory storage');
+// Only connect to DB if not in Vercel environment or if DB URI is available
+if (process.env.MONGODB_URI) {
+  const connectDB = require('./config/db');
+  connectDB();
 }
 
 const shipmentsRouter = require('./routes/shipments');
@@ -18,15 +17,15 @@ const chatbotRouter = require('./routes/chatbot');
 const insightsRouter = require('./routes/insights');
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
 // Serve static files from frontend
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// API Routes
+// API routes
 app.use('/api/shipments', shipmentsRouter);
 app.use('/api/emissions', emissionsRouter);
 app.use('/api/lanes', lanesRouter);
@@ -34,24 +33,21 @@ app.use('/api/reports', reportsRouter);
 app.use('/api/chatbot', chatbotRouter);
 app.use('/api/insights', insightsRouter);
 
-// API Config endpoint
 app.get('/api/config', (req, res) => {
   res.json({
-    googleMapsKey: process.env.GOOGLE_MAPS_API_KEY || '',
-    geminiKey: process.env.GEMINI_API_KEY || ''
+    googleMapsKey: process.env.GOOGLE_MAPS_API_KEY || ''
   });
 });
 
-// Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
     message: 'EvaFlow API is running',
-    timestamp: new Date().toISOString()
+    environment: process.env.NODE_ENV || 'development'
   });
 });
 
-// Catch all handler for frontend routing
+// Catch-all handler for frontend routes
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
@@ -61,7 +57,6 @@ module.exports = app;
 
 // Local development
 if (process.env.NODE_ENV !== 'production') {
-  const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
     console.log(`EvaFlow Carbon Intelligence Platform running on http://localhost:${PORT}`);
   });
